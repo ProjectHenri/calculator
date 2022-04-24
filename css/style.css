@@ -28,9 +28,6 @@ body{
     align-items: flex-end;
 
 }
-.clear{
-    grid-column: span 2;
-}
 .equals{
     grid-column: span 2;
 }

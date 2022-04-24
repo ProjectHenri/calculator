@@ -6,19 +6,20 @@ const operators = document.querySelectorAll('.operator');
 const equals = document.querySelector('.equals');
 const clear = document.querySelector('.clear');
 const deleteNumber = document.querySelector('.backspace');
+const negation = document.querySelector('.negation');
 
-let currentNumber = '';
+let currentNumber = '0';
 let previousNumber = '';
 let operator = null;
 let result = null;
 
 function addNumber(value){
     if(result !== null) {
-        // Remove the result if the user starts typing a new number after a calculation
+        // Remove the result from the screen if the user starts typing a new number after a calculation
         result = null;
         currentNumber = '';
     }
-    if(value === '.' && currentNumber.includes('.')) return;
+    if(value === '.' && currentNumber.includes('.')) return; // Prevent user from adding multiple decimals to the number
     if (currentNumber.startsWith('0') && currentNumber.length === 1 && value != '.'){
         // If the first number is zero, prevent user from adding additional zeros to the screen
         currentNumber = value; 
@@ -33,14 +34,22 @@ function addNumber(value){
 }
 
 function removeNumber(){
-    if(currentNumber.length === 1 || result !== null){
-        // Reset current number to 0 if the delete key is pressed with only one number on the screen
-        // or reset it to 0 if it's pressed when there's a result of a calculation on the screen
+    if(currentNumber.length === 1 || result !== null || 
+       currentNumber.length === 2 && currentNumber.startsWith('-') ||
+       currentNumber === '-0.'
+    ){
+        // Handle unexpected situations
         currentNumber = '0';
     }else{
         currentNumber = currentNumber.slice(0, currentNumber.length-1);
     }
 }
+
+function negateNumber(){
+    if(currentNumber == '0'|| currentNumber === '' || result !== null) return;
+    currentNumber = currentNumber.startsWith('-') ? currentNumber.slice(1) : `-${currentNumber}`;
+}
+
 function addOperator(input){
     if(currentNumber === '' && operator !== null){
         // Let the user change the operator if they have not entered a second operand
@@ -66,7 +75,7 @@ function clearAll(){
 }
 
 function operate(){
-    if((currentNumber === '') || (operator === null)) return; // Prevent unexpected results
+    if(currentNumber === '' || operator === null) return; // Prevent unexpected results
     currentNumber = Number(currentNumber);
     previousNumber = Number(previousNumber);
     switch(operator){
@@ -80,7 +89,15 @@ function operate(){
             result = previousNumber * currentNumber;
         break;
         case '÷':
-            result = previousNumber / currentNumber
+            if(currentNumber === 0){
+                result = 0;
+                alert(`Please don't break the universe`);
+            }else{
+                result = previousNumber / currentNumber;
+            }
+        break
+        default:
+            return;
     }
     result = result.toString();
     currentNumber = result;
@@ -122,6 +139,11 @@ equals.addEventListener('click', () => {
 
 deleteNumber.addEventListener('click', () => {
     removeNumber();
+    updateScreen();
+});
+
+negation.addEventListener('click', () => {
+    negateNumber();
     updateScreen();
 });
 
