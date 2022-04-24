@@ -34,11 +34,11 @@ function addNumber(value){
 }
 
 function removeNumber(){
-    if(currentNumber.length === 1 || result !== null || 
+    // Handle unexpected situations
+    if(currentNumber.length === 1 || result !== null ||
        currentNumber.length === 2 && currentNumber.startsWith('-') ||
        currentNumber === '-0.'
     ){
-        // Handle unexpected situations
         currentNumber = '0';
     }else{
         currentNumber = currentNumber.slice(0, currentNumber.length-1);
