@@ -12,4 +12,4 @@
     <li>Tried to maintain clean coding practices</li>
     <li>A better understanding of Javascript in general</li>
 </ul>
-<h2>LIVE DEMO: <a>https://projecthenri.github.io/calculator/</a></h2>
+<h2>LIVE DEMO: <a href="https://projecthenri.github.io/calculator/">CALCULATOR</a></h2>
