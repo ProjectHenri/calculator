@@ -108,6 +108,9 @@ body{
     opacity:0.9;
 }
 .btn:focus, .operator:focus, .clear:focus, .negation:focus, .backspace:focus{
+    border: none;
+}
+.btn:focus-visible, .operator:focus-visible, .clear:focus-visible, .negation:focus-visible, .backspace:focus-visible{
     border:solid 1px rgb(112,112,122);
 }
 footer{
