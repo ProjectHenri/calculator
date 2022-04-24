@@ -86,6 +86,9 @@ body{
 .btn:active{
     background-color: rgba(0, 210, 255, 0.2);
 }
+.btn:focus, .operator:focus, .clear:focus, .negation:focus, .backspace:focus{
+    border:solid 1px rgb(112,112,122);
+}
 .calcContainer .operator, .calcContainer .clear, .calcContainer .negation, .calcContainer .backspace{
     color:rgb(0, 210, 255);
     border: none;
@@ -103,6 +106,9 @@ body{
 }
 .calcContainer .equals:active{
     opacity:0.9;
+}
+.btn:focus, .operator:focus, .clear:focus, .negation:focus, .backspace:focus{
+    border:solid 1px rgb(112,112,122);
 }
 footer{
     display: flex;
